@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Matchmaker - Find Your Perfect Scholarship</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Page -->
+        <div id="login-page" class="page active">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="logo">
+                        <div class="logo-icon">🎓</div>
+                        <h1>Scholarship Matchmaker</h1>
+                        <p class="tagline">AI-Powered Scholarship Discovery</p>
+                    </div>
+                    
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                        <button class="tab-btn" onclick="switchTab('register')">Register</button>
+                    </div>
+                    
+                    <form id="login-form" class="auth-form active">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Login</span>
+                            <div class="btn-shine"></div>
+                        </button>
+                    </form>
+                    
+                    <form id="register-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="register-name">Full Name</label>
+                            <input type="text" id="register-name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" required placeholder="Create a password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>Create Account</span>
+                            <div class="btn-shine"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Page -->
+        <div id="profile-page" class="page">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <span class="logo-icon">🎓</span>
+                    <span>Scholarship Matchmaker</span>
+                </div>
+                <div class="nav-user">
+                    <span id="user-name" class="user-greeting"></span>
+                    <button onclick="logout()" class="btn btn-outline">Logout</button>
+                </div>
+            </nav>
+            
+            <div class="container">
+                <div class="profile-header">
+                    <h2>Tell Us About Yourself</h2>
+                    <p>Help us find the perfect scholarships tailored just for you!</p>
+                    <div class="progress-indicator">
+                        <div class="progress-step active">1</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step">2</div>
+                        <div class="progress-line"></div>
+                        <div class="progress-step">3</div>
+                    </div>
+                </div>
+                
+                <form id="profile-form" class="profile-form">
+                    <div class="form-section">
+                        <h3>Academic Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" min="16" max="65" required placeholder="Your age">
+                            </div>
+                            <div class="form-group">
+                                <label for="gpa">GPA (4.0 scale)</label>
+                                <input type="number" id="gpa" min="0" max="4" step="0.01" required placeholder="3.50">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="education-level">Education Level</label>
+                                <select id="education-level" required>
+                                    <option value="">Select Level</option>
+                                    <option value="Undergraduate">Undergraduate</option>
+                                    <option value="Graduate">Graduate</option>
+                                    <option value="PhD">PhD</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="field-of-study">Field of Study</label>
+                                <select id="field-of-study" required>
+                                    <option value="">Select Field</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Medicine">Medicine</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Art">Art & Design</option>
+                                    <option value="Psychology">Psychology</option>
+                                    <option value="Social Work">Social Work</option>
+                                    <option value="Environmental Science">Environmental Science</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Background Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="USA">United States</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="France">France</option>
+                                    <option value="India">India</option>
+                                    <option value="China">China</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="financial-need">Financial Need Level</label>
+                                <select id="financial-need" required>
+                                    <option value="">Select Need Level</option>
+                                    <option value="Low">Low - Family income > KES 120,000</option>
+                                    <option value="Medium">Medium - Family income KES 120,000- 2,400,000</option>
+                                    <option value="High">High - Family income < KES 2,400,000</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <span>Find My Perfect Scholarships</span>
+                        <div class="btn-shine"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Page -->
+        <div id="results-page" class="page">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <span class="logo-icon">🎓</span>
+                    <span>Scholarship Matchmaker</span>
+                </div>
+                <div class="nav-user">
+                    <span id="user-name-results" class="user-greeting"></span>
+                    <button onclick="showProfile()" class="btn btn-outline">Edit Profile</button>
+                    <button onclick="logout()" class="btn btn-outline">Logout</button>
+                </div>
+            </nav>
+            
+            <div class="container">
+                <div class="results-header">
+                    <h2>Your Top Scholarship Matches</h2>
+                    <p>AI-powered recommendations based on your unique profile</p>
+                    <div class="stats-bar">
+                        <div class="stat">
+                            <span class="stat-number" id="total-matches">3</span>
+                            <span class="stat-label">Perfect Matches</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="total-value">$0</span>
+                            <span class="stat-label">Total Value</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="scholarships-container" class="scholarships-grid">
+                    <!-- Scholarship cards will be populated here -->
+                </div>
+                
+                <div class="results-footer">
+                    <div class="footer-card">
+                        <h3>Pro Tips</h3>
+                        <ul>
+                            <li>Apply early - deadlines approach quickly!</li>
+                            <li>Tailor your essays to each scholarship's mission</li>
+                            <li>Update your profile for even better matches</li>
+                        </ul>
+                        <button onclick="showProfile()" class="btn btn-secondary">Update Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <h3>🤖 AI is analyzing your profile...</h3>
+                <p>Finding your perfect scholarship matches</p>
+                <div class="loading-steps">
+                    <div class="loading-step active">Analyzing profile</div>
+                    <div class="loading-step">Filtering scholarships</div>
+                    <div class="loading-step">Calculating matches</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
